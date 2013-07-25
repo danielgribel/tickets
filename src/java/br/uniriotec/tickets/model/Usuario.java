@@ -9,12 +9,20 @@ public class Usuario {
     private String sobrenome;
     private String email;
     private String senha;
+    private Perfil perfil;
+
+    public enum Perfil {
+        ADMIN,
+        FINAL,
+        OPERADOR
+    }
 
     public Usuario(String nome, String sobrenome, String email, String senha) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
         this.senha = senha;
+        this.perfil = Perfil.FINAL;
     }
 
     public String getNome() {
@@ -49,4 +57,11 @@ public class Usuario {
         this.senha = senha;
     }
     
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
 }
