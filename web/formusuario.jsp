@@ -13,12 +13,14 @@
         <title>Tickets - Cadastro de usuario</title>
     </head>
     <body>
-        <h2><s:text name="Cadastro de usuario"/></h2>
+        <h2><s:text name="menu.cadastro.usuario"/></h2>
         <s:form action="salvarUsuario" method="get"> 
-            <s:textfield key="usuario.nome" />
+            <s:textfield key="label.usuario.nome" />
             <s:textfield key="label.usuario.sobrenome" />
             <s:textfield key="label.usuario.email" />
-            <s:submit />
+            <s:textfield key="label.usuario.senha" />
+            <s:textfield key="label.usuario.confirmasenha" />
+            <s:submit key="botao.cadastro.usuario" />
         </s:form>
     </body>
 </html>

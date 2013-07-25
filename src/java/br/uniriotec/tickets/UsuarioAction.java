@@ -15,7 +15,7 @@ public class UsuarioAction extends ActionSupport {
     /**
      * Provide default valuie for Message property.
      */
-    public static final String MESSAGE = "HelloWorld.message";
+    public static final String MESSAGE = "";
 
     /**
      * Field for Message property.
@@ -39,9 +39,4 @@ public class UsuarioAction extends ActionSupport {
     public void setMessage(String message) {
         this.message = message;
     }
-    
-    public String salvarUsuario() {
-        return SUCCESS;
-    }
 }
-
