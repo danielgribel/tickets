@@ -1,4 +1,4 @@
-package br.uniriotec.tickets;
+package br.uniriotec.tickets.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 
