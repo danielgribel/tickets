@@ -1,6 +1,6 @@
 <%-- 
-    Document   : CadastroUsuario
-    Created on : Jul 22, 2013, 10:23:32 PM
+    Document   : login
+    Created on : Jul 25, 2013, 2:22:20 PM
     Author     : Daniel Gribel <daniel.gribel@uniriotec.br>
 --%>
 
@@ -10,18 +10,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><s:text name="tituloPagina.usuario"/></title>
+        <title><s:text name="tituloPagina.login"/></title>
     </head>
     <body>
         <h1><a href="/tickets"/><s:text name="app.titulo"/></a></h1>
-        <h2><s:text name="menu.cadastro.usuario"/></h2>
-        <s:form action="salvarUsuario" method="get"> 
-            <s:textfield key="label.usuario.nome" />
-            <s:textfield key="label.usuario.sobrenome" />
+        <h2><s:text name="menu.login"/></h2>
+        <s:form action="login" method="get"> 
             <s:textfield key="label.usuario.email" />
             <s:textfield key="label.usuario.senha" />
-            <s:textfield key="label.usuario.confirmasenha" />
-            <s:submit key="botao.salvar" />
+            <s:submit key="botao.login" />
         </s:form>
     </body>
 </html>

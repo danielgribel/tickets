@@ -10,5 +10,8 @@
         <action name="" method="" class="br.uniriotec.tickets.action.UsuarioAction">
             <result name="input">/formusuario.jsp</result>
         </action>
+        <action name="" method="" class="br.uniriotec.tickets.action.UsuarioAction">
+            <result name="input">/login.jsp</result>
+        </action>
     </package>
 </struts>
