@@ -5,9 +5,9 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <package name="example" namespace="/example" extends="struts-default">
-        <action name="HelloWorld" class="example.HelloWorld">
-            <result>/example/HelloWorld.jsp</result>
+    <package name="br.uniriotec.tickets" namespace="/br.uniriotec.tickets" extends="struts-default">
+        <action name="UsuarioAction" class="br.uniriotec.tickets.UsuarioAction">
+            <result>/HelloWorld.jsp</result>
         </action>
     </package>
 </struts>
