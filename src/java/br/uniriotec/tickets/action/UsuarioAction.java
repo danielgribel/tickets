@@ -1,42 +1,80 @@
 package br.uniriotec.tickets.action;
 
+import br.uniriotec.tickets.dao.FabricaDAO;
+import br.uniriotec.tickets.model.Usuario;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Map;
+import org.apache.struts2.interceptor.RequestAware;
 
-/**
- * <code>Set welcome message.</code>
- */
-public class UsuarioAction extends ActionSupport {
+public class UsuarioAction extends ActionSupport implements RequestAware {
 
-    public String execute() throws Exception {
-        setMessage(getText(MESSAGE));
+    private Map<String, Object> request;
+    private String email;
+    private String nome;
+    private String sobrenome;
+    private String senha;
+    private String confirmaSenha;
+    private Usuario.Perfil perfil;
+    
+    public UsuarioAction() {
+        
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setConfirmaSenha(String confirmaSenha) {
+        this.confirmaSenha = confirmaSenha;
+    }
+
+    public void setPerfil(Usuario.Perfil perfil) {
+        this.perfil = perfil;
+    }
+    
+    public String salvarUsuario() {
+        Usuario usuario = new Usuario(nome, sobrenome, email, senha);
+        request.put("usuario", usuario);
+        
+        if(email.length() == 0) {
+            addFieldError("email", getText("erro.email.obrigatorio"));   
+        }
+        if(nome.length() == 0) {
+            addFieldError("nome", getText("erro.nome.obrigatorio"));
+        }
+        if(sobrenome.length() == 0) {
+            addFieldError("sobrenome", getText("erro.sobrenome.obrigatorio"));
+        }
+        if(senha.length() == 0) {
+            addFieldError("senha", getText("erro.senha.obrigatorio"));
+        }
+        if(!senha.equals(confirmaSenha)) {
+            addFieldError("senha", getText("erro.senha.diferente"));
+        }
+        if(hasErrors()) {
+            return INPUT;
+        }
+        
+        FabricaDAO.getUsuarioDAO().insere(usuario);
+        
         return SUCCESS;
     }
-
-    /**
-     * Provide default valuie for Message property.
-     */
-    public static final String MESSAGE = "";
-
-    /**
-     * Field for Message property.
-     */
-    private String message;
-
-    /**
-     * Return Message property.
-     *
-     * @return Message property
-     */
-    public String getMessage() {
-        return message;
+    
+    @Override
+    public void setRequest(Map<String, Object> requisicao) {
+        this.request = requisicao;
     }
-
-    /**
-     * Set Message property.
-     *
-     * @param message Text to display on HelloWorld page.
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    
 }

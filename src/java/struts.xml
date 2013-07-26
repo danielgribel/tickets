@@ -4,14 +4,17 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <constant name="struts.devMode" value="true" />
+    <constant name="struts.devMode" value="false" />
     <constant name="struts.custom.i18n.resources" value="Messages" />
-    <package name="br.uniriotec.tickets.action" extends="struts-default" namespace="/br.uniriotec.tickets.action">
-        <action name="" method="" class="br.uniriotec.tickets.action.UsuarioAction">
+    
+    <package name="action" extends="struts-default" namespace="/">
+        <action name="salvarUsuario" method="salvarUsuario" class="br.uniriotec.tickets.action.UsuarioAction">
+            <result name="success" type="redirect">/index.html</result>
             <result name="input">/formusuario.jsp</result>
         </action>
         <action name="" method="" class="br.uniriotec.tickets.action.UsuarioAction">
             <result name="input">/login.jsp</result>
         </action>
     </package>
+    
 </struts>

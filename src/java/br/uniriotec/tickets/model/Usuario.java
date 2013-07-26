@@ -17,6 +17,10 @@ public class Usuario {
         OPERADOR
     }
 
+    public Usuario() {
+    
+    }
+    
     public Usuario(String nome, String sobrenome, String email, String senha) {
         this.nome = nome;
         this.sobrenome = sobrenome;
