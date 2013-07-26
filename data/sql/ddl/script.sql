@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS tickets;
 CREATE DATABASE tickets;
 USE tickets;
 CREATE TABLE Usuario
