@@ -8,6 +8,8 @@ import br.uniriotec.tickets.dao.SuporteDAO;
 import br.uniriotec.tickets.model.Usuario;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -16,9 +18,35 @@ import java.sql.SQLException;
  */
 public class UsuarioDAO implements IUsuarioDAO {
     
+    private Usuario carrega(ResultSet rs) throws SQLException {
+        Usuario usuario = new Usuario();
+        usuario.setEmail(rs.getString("email")); 
+        usuario.setNome(rs.getString("nome"));
+        usuario.setSobrenome(rs.getString("sobrenome"));
+        usuario.setSenha(rs.getString("senha"));
+        //usuario.setPerfil(rs.getString("email"));
+        return usuario;
+    }
+    
     @Override
     public Usuario getUsuario(String email) {
-        return null;
+        Connection c = SuporteDAO.getConnection();
+        if(c == null) {
+            return null;
+        }
+        Usuario usuario = null;
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Usuario WHERE email = ?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                usuario = carrega(rs);
+            }
+            c.close();
+        } catch(SQLException e) {
+            SuporteDAO.log(e.getMessage());
+        }
+        return usuario;
     }
     
     @Override

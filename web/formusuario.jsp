@@ -3,7 +3,7 @@
     Created on : Jul 22, 2013, 10:23:32 PM
     Author     : Daniel Gribel <daniel.gribel@uniriotec.br>
 --%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <%@include file="cabecalho.jsp"%>
 <div id="content">
     <h2><s:text name="menu.cadastro.usuario"/></h2>

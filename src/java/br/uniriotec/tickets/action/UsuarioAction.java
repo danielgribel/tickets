@@ -66,9 +66,7 @@ public class UsuarioAction extends ActionSupport implements RequestAware {
         if(hasErrors()) {
             return INPUT;
         }
-        
         FabricaDAO.getUsuarioDAO().insere(usuario);
-        
         return SUCCESS;
     }
     
