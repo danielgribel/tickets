@@ -35,10 +35,17 @@
             <result>/login.jsp</result>
         </action>
         
+        <action name="alteraDados">
+            <result>/alteracaoDados.jsp</result>
+        </action>
+        
+        <action name="alteraSenha">
+            <result>/alteracaoSenha.jsp</result>
+        </action>
+        
         <action name="loginAction" class="br.uniriotec.tickets.action.LoginAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">home</param>
-                
             </result>
             <result name="input">/login.jsp</result>
         </action>
@@ -46,7 +53,6 @@
         <action name="logoutAction" class="br.uniriotec.tickets.action.LogoutAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">login</param>
-                
             </result>
         </action>
         

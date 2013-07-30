@@ -106,3 +106,7 @@ label, .errorMessage {
     float: right;
     margin-right: 10px;
 }
+
+#linkCadastro {
+    font-size: 14px;
+}

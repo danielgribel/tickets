@@ -27,5 +27,6 @@
             <s:submit />
         </s:form>
     </s:div>
+    <div id="linkCadastro">Não tem cadastro? <a href="cadastro">Clique aqui</a></div>
 </div>
 <%@include file="rodape.jsp"%>
