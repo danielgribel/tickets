@@ -97,3 +97,12 @@ label, .errorMessage {
     font-size: 18px;
     letter-spacing: -1px;
 }
+
+#cabecalhoHome {
+    display: block;
+}
+
+#cabecalhoHome a {
+    float: right;
+    margin-right: 10px;
+}

@@ -24,7 +24,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         usuario.setNome(rs.getString("nome"));
         usuario.setSobrenome(rs.getString("sobrenome"));
         usuario.setSenha(rs.getString("senha"));
-        //usuario.setPerfil(rs.getString("email"));
+        usuario.setPerfil(Usuario.Perfil.valueOf(rs.getString("perfil")));
         return usuario;
     }
     
