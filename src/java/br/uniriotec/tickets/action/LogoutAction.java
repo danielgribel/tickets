@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.uniriotec.tickets.action;
 
 import com.opensymphony.xwork2.ActionSupport;

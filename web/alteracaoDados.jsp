@@ -10,10 +10,11 @@
     <h2><s:text name="menu.alteracaoDados"/></h2>
     <s:div>
         <s:actionerror />
-        <s:form action="alteraDados" method="post">
-            <s:textfield name="nome" label="Nome" />
-            <s:textfield name="sobrenome" label="Sobrenome" />
-            <s:submit />
+        <s:form action="alterarDados" method="get">
+            <s:hidden name="email" value="%{#session['usuario'].email}" />
+            <s:textfield key="label.usuario.nome" name="nome" value="%{#request.usuario.nome}" />
+            <s:textfield key="label.usuario.sobrenome" name="sobrenome" value="%{#request.usuario.sobrenome}" />
+            <s:submit value="Salvar" />
         </s:form>
     </s:div>
 </div>

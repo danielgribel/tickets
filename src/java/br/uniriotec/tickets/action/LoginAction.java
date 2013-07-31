@@ -6,6 +6,9 @@ import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -18,8 +21,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
     private Map<String, Object> session;
     private String email;
     private String senha;
-    private String nome;
-    
+//    private String nome;
+//    
     public LoginAction() {
         
     }
@@ -40,33 +43,33 @@ public class LoginAction extends ActionSupport implements SessionAware {
         this.senha = senha;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    
-    public String login() {
-        Usuario usuario = FabricaDAO.getUsuarioDAO().getUsuario(email);
-        
-        if(email == null || senha == null) {
-            addActionError(getText("erro.login"));
-        }
-        if(usuario == null) {
-            addActionError(getText("erro.login"));
-        }
-        if(usuario != null) {
-            if(!senha.equals(usuario.getSenha())) {
-                addActionError(getText("erro.login"));
-            }
-        }
-        if(hasErrors()) {
-            return ERROR;
-        }
-        return SUCCESS;
-    }
+//    public String getNome() {
+//        return nome;
+//    }
+//
+//    public void setNome(String nome) {
+//        this.nome = nome;
+//    }
+//    
+//    public String login() {
+//        Usuario usuario = FabricaDAO.getUsuarioDAO().getUsuario(email);
+//        
+//        if(email == null || senha == null) {
+//            addActionError(getText("erro.login"));
+//        }
+//        if(usuario == null) {
+//            addActionError(getText("erro.login"));
+//        }
+//        if(usuario != null) {
+//            if(!senha.equals(usuario.getSenha())) {
+//                addActionError(getText("erro.login"));
+//            }
+//        }
+//        if(hasErrors()) {
+//            return ERROR;
+//        }
+//        return SUCCESS;
+//    }
     
     public boolean isLoginValido(Usuario u) {
         Usuario usuario = FabricaDAO.getUsuarioDAO().getUsuario(u.getEmail());
@@ -83,7 +86,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     }
     
     @Override
-    public String execute() { 
+    public String execute() {
         clearFieldErrors();
         Usuario usuario = (Usuario)session.get("usuario");
         if(usuario != null) {
@@ -95,6 +98,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
             u.setSenha(senha);
             if(isLoginValido(u)) {
                 session.put("usuario", u);
+                Timestamp ts = new Timestamp(System.currentTimeMillis());
+                String s = new SimpleDateFormat("dd/MM/yyyy kk:mm").format(ts);
+                session.put("ultimoLogin", s);
                 return SUCCESS;
             }
             else {

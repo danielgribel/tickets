@@ -2,6 +2,8 @@ package br.uniriotec.tickets.action;
 
 import br.uniriotec.tickets.dao.FabricaDAO;
 import br.uniriotec.tickets.model.Usuario;
+import static com.opensymphony.xwork2.Action.INPUT;
+import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
 import org.apache.struts2.interceptor.RequestAware;
@@ -60,7 +62,7 @@ public class UsuarioAction extends ActionSupport implements RequestAware {
         if(senha.length() == 0) {
             addFieldError("senha", getText("erro.senha.obrigatorio"));
         }
-        if(!senha.equals(confirmaSenha)) {
+        else if(!senha.equals(confirmaSenha)) {
             addFieldError("senha", getText("erro.senha.diferente"));
         }
         if(hasErrors()) {
@@ -68,7 +70,7 @@ public class UsuarioAction extends ActionSupport implements RequestAware {
         }
         FabricaDAO.getUsuarioDAO().insere(usuario);
         return SUCCESS;
-    }
+    }    
     
     @Override
     public void setRequest(Map<String, Object> requisicao) {
