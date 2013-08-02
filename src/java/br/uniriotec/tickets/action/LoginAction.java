@@ -2,13 +2,11 @@ package br.uniriotec.tickets.action;
 
 import br.uniriotec.tickets.dao.FabricaDAO;
 import br.uniriotec.tickets.model.Usuario;
-import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -22,7 +20,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     private String email;
     private String senha;
 //    private String nome;
-//    
+    
     public LoginAction() {
         
     }
@@ -99,7 +97,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
             if(isLoginValido(u)) {
                 session.put("usuario", u);
                 Timestamp ts = new Timestamp(System.currentTimeMillis());
-                String s = new SimpleDateFormat("dd/MM/yyyy kk:mm").format(ts);
+                String s = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(ts);
                 session.put("ultimoLogin", s);
                 return SUCCESS;
             }

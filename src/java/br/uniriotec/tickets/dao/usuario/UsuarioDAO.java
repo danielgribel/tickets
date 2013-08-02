@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -43,6 +45,27 @@ public class UsuarioDAO implements IUsuarioDAO {
             SuporteDAO.log(e.getMessage());
         }
         return usuario;
+    }
+    
+    @Override
+    public List<String> listarEmailsPorPerfil(Usuario.Perfil perfil) {
+        Connection c = SuporteDAO.getConnection();
+        if(c == null) {
+            return null;
+        }
+        List<String> emails = new ArrayList<String>();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT email FROM Usuario WHERE perfil = ?");
+            ps.setString(1, perfil.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                emails.add(rs.getString("email"));
+            }
+            c.close();
+        } catch(SQLException e) {
+            SuporteDAO.log(e.getMessage());
+        }
+        return emails;
     }
     
     @Override

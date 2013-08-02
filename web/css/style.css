@@ -8,6 +8,7 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12px;
+    margin: 0;
 }
 
 label, .errorMessage {
@@ -20,11 +21,11 @@ label, .errorMessage {
 }
 
 #header {
-    position: fixed;
+/*    position: fixed;*/
     top: 0;
     left: 0;
     right: 0;
-    height: 100px;
+    height: 70px;
     background-color: #333;
     padding: 20px;
 }
@@ -54,7 +55,7 @@ label, .errorMessage {
 }
 
 #footer {
-    position: fixed;
+/*    position: fixed;*/
     bottom: 0;
     left: 0;
     right: 0;
@@ -71,9 +72,8 @@ label, .errorMessage {
 }
 
 #content {
-    position: fixed;
-    top: 100px;
-    bottom: 100px;
+/*    position: absolute;*/
+/*    bottom: 100px;*/
     left: 0;
     right: 0;
     background-color: #fff;
@@ -96,6 +96,7 @@ label, .errorMessage {
 #content #boasVindas {
     font-size: 18px;
     letter-spacing: -1px;
+    display: block;
 }
 
 #cabecalhoHome {
@@ -114,4 +115,14 @@ label, .errorMessage {
 #ultimoLogin {
     display: block;
     margin-bottom: 5px;
+}
+
+.tituloTicket {
+    display: block;
+}
+
+#novoTicket {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

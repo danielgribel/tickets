@@ -10,3 +10,14 @@ CREATE TABLE Usuario
     perfil VARCHAR(20) NOT NULL,
     PRIMARY KEY(email)
 );
+CREATE TABLE Ticket
+(
+    id_ticket INT NOT NULL AUTO_INCREMENT,
+    titulo VARCHAR(255) NOT NULL,
+    sistema INT NOT NULL,
+    componente INT NOT NULL,
+    descricao VARCHAR(255),
+    status VARCHAR(20) NOT NULL,
+    operador VARCHAR(80) NOT NULL,
+    PRIMARY KEY(id_ticket)
+);
