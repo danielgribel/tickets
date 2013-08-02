@@ -10,3 +10,4 @@ CREATE TABLE Usuario
     perfil VARCHAR(20) NOT NULL,
     PRIMARY KEY(email)
 );
+

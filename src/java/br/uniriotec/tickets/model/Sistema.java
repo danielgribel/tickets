@@ -12,16 +12,14 @@ import java.util.ArrayList;
  */
 public class Sistema {
     private String nome;
-    private ArrayList<Usuario> componentes;
+    private int id;
     
     public Sistema(){
         
     }
     
-    public Sistema(String nome, ArrayList c){
+    public Sistema(String nome){
         this.nome = nome;
-        componentes = new ArrayList();
-        componentes = c;
     }
     
     public String getNome(){
@@ -32,12 +30,12 @@ public class Sistema {
         this.nome = nome;
     }
     
-    public ArrayList<Usuario> getComponentes(){
-        return componentes;
+    public int getId(){
+        return id;
     }
     
-    public void setComponentes(ArrayList c){
-        componentes = c;
+    public void setId(int id){
+        this.id = id;
     }
     
 }

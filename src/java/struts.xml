@@ -22,6 +22,11 @@
             <result name="input">/formusuario.jsp</result>
         </action>
         
+        <action name="salvarSistema" method="salvarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <result name="success" type="redirect">/index.html</result>
+            <result name="input">/formsistema.jsp</result>
+        </action>
+        
 <!--        <action name="login" method="login" class="br.uniriotec.tickets.action.LoginAction">
             <result name="success">/home.jsp</result>
             <result name="error">/login.jsp</result>

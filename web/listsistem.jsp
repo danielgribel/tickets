@@ -7,5 +7,8 @@
 <%@include file="cabecalho.jsp"%>
 <div id="content">
     <h2><s:text name="menu.cadastro.sistema"/></h2>
+    <table id="tabelaSistemas"/>
+    <tr>
+        <th class="nome"><
 </div>
 <%@include file="rodape.jsp"%>
