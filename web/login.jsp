@@ -4,7 +4,7 @@
     Author     : Daniel Gribel <daniel.gribel@uniriotec.br>
 --%>
 
-<%@include file="cabecalho.jsp"%>
+<%--<%@include file="cabecalho.jsp"%>
 <div id="content">        
     <h2><s:text name="menu.login"/></h2>
     <s:actionerror />
@@ -13,5 +13,20 @@
         <s:password key="label.usuario.senha" name="senha" />
         <s:submit value="Login" />
     </s:form>
+</div>
+<%@include file="rodape.jsp"%>--%>
+
+
+<%@include file="cabecalho.jsp"%>
+<div id="content">
+    <s:div>
+        <s:actionerror />
+        <s:form action="loginAction" method="post">
+            <s:textfield name="email" label="Email" />
+            <s:password name="senha" label="Senha" />
+            <s:submit />
+        </s:form>
+    </s:div>
+    <div id="linkCadastro">Não tem cadastro? <a href="cadastro">Clique aqui</a></div>
 </div>
 <%@include file="rodape.jsp"%>

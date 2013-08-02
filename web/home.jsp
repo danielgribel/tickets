@@ -5,8 +5,9 @@
 --%>
 
 <%@include file="cabecalho.jsp"%>
-<div id="content">        
+<div id="content">
+    <%@include file="cabecalhoHome.jsp"%>
     <h2><s:text name="menu.home"/></h2>
-    <span id="boasVindas">Bem-vindo(a) <font color=FF4500><s:property value="email" /> </font></span>
+    <span id="boasVindas">Bem-vindo(a) <s:property value="#session['usuario'].nome" /></span>
 </div>
 <%@include file="rodape.jsp"%>

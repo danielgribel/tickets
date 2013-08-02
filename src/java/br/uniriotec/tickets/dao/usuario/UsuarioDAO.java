@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.uniriotec.tickets.dao.usuario;
 
 import br.uniriotec.tickets.dao.SuporteDAO;
@@ -24,7 +20,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         usuario.setNome(rs.getString("nome"));
         usuario.setSobrenome(rs.getString("sobrenome"));
         usuario.setSenha(rs.getString("senha"));
-        //usuario.setPerfil(rs.getString("email"));
+        usuario.setPerfil(Usuario.Perfil.valueOf(rs.getString("perfil")));
         return usuario;
     }
     
@@ -73,7 +69,24 @@ public class UsuarioDAO implements IUsuarioDAO {
     
     @Override
     public boolean atualiza(Usuario usuario) {
-        return false;
+        Connection c = SuporteDAO.getConnection();
+        if (c == null) {
+            return false;
+        }
+        try {
+            CallableStatement cs = c.prepareCall("{call AtualizaUsuario(?, ?, ?, ?, ?)}");
+            cs.setString(1, usuario.getEmail());
+            cs.setString(2, usuario.getNome());
+            cs.setString(3, usuario.getSobrenome());
+            cs.setString(4, usuario.getSenha());
+            cs.setString(5, usuario.getPerfil().toString());
+            cs.execute();
+            c.close();
+            return true;
+        } catch(SQLException e) {
+            SuporteDAO.log(e.getMessage());
+            return false;
+        }
     }
     
     @Override

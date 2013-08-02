@@ -8,13 +8,72 @@
     <constant name="struts.custom.i18n.resources" value="Messages" />
     
     <package name="action" extends="struts-default" namespace="/">
+        
+        <interceptors>
+            <interceptor name="authenticateInterceptor" class="br.uniriotec.tickets.interceptador.InterceptadorAutenticacao"/>
+            <interceptor-stack name="secureStack">
+                <interceptor-ref name="authenticateInterceptor" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+        
         <action name="salvarUsuario" method="salvarUsuario" class="br.uniriotec.tickets.action.UsuarioAction">
             <result name="success" type="redirect">/index.html</result>
             <result name="input">/formusuario.jsp</result>
         </action>
-        <action name="login" method="login" class="br.uniriotec.tickets.action.LoginAction">
+        
+<!--        <action name="login" method="login" class="br.uniriotec.tickets.action.LoginAction">
             <result name="success">/home.jsp</result>
             <result name="error">/login.jsp</result>
+        </action>-->
+        
+        <action name="cadastro">
+            <result>/formusuario.jsp</result>
+        </action>
+        
+        <action name="login">
+            <result>/login.jsp</result>
+        </action>
+        
+        <action name="dados">
+            <result>/alteracaoDados.jsp</result>
+        </action>
+        
+        <action name="senha">
+            <result>/alteracaoSenha.jsp</result>
+        </action>
+        
+        <action name="alterarDados" class="br.uniriotec.tickets.action.DadosUsuarioAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">home</param>
+            </result>
+            <result name="input">/alteracaoDados.jsp</result>
+        </action>
+        
+        <action name="alterarSenha" class="br.uniriotec.tickets.action.SenhaUsuarioAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">home</param>
+            </result>
+            <result name="input">/alteracaoSenha.jsp</result>
+        </action>
+        
+        <action name="loginAction" class="br.uniriotec.tickets.action.LoginAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">home</param>
+            </result>
+            <result name="input">/login.jsp</result>
+        </action>
+        
+        <action name="logoutAction" class="br.uniriotec.tickets.action.LogoutAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">login</param>
+            </result>
+        </action>
+        
+        <action name="home">
+            <interceptor-ref name="secureStack" />
+            <result >/home.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
     </package>
