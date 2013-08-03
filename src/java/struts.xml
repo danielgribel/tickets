@@ -22,9 +22,9 @@
             <result name="input">/formusuario.jsp</result>
         </action>
         
-        <action name="salvarSistema" method="salvarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+        <action name="salvarTicket" method="salvarTicket" class="br.uniriotec.tickets.action.TicketAction">
             <result name="success" type="redirect">/index.html</result>
-            <result name="input">/formsistema.jsp</result>
+            <result name="input">/formTicket.jsp</result>
         </action>
         
 <!--        <action name="login" method="login" class="br.uniriotec.tickets.action.LoginAction">
@@ -46,6 +46,10 @@
         
         <action name="senha">
             <result>/alteracaoSenha.jsp</result>
+        </action>
+        
+        <action name="ticket">
+            <result>/formTicket.jsp</result>
         </action>
         
         <action name="alterarDados" class="br.uniriotec.tickets.action.DadosUsuarioAction">
@@ -75,11 +79,28 @@
             </result>
         </action>
         
-        <action name="home">
+        <action name="home" method="listarTickets" class="br.uniriotec.tickets.action.TicketAction">
             <interceptor-ref name="secureStack" />
-            <result >/home.jsp</result>
+            <result>/home.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
+        
+<!--        <action name="editarTicket" class="br.uniriotec.tickets.action.TicketAction" method="display">
+            <result name="none">/formTicket.jsp</result>
+            <result name="success" type="redirect">/home</result>
+        </action>-->
+        
+        <action name="criarTicket" method="criarTicket" class="br.uniriotec.tickets.action.TicketAction">
+            <result name="input">/formTicket.jsp</result>
+        </action>
+        
+        <action name="editarTicket" method="editarTicket" class="br.uniriotec.tickets.action.TicketAction">
+            <result name="input">/formTicket.jsp</result>
+        </action>
+        
+<!--        <action name="resultAction" class="br.uniriotec.tickets.action.SelectAction">
+            <result name="success">/index.html</result>
+        </action>-->
         
     </package>
     
