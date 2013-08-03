@@ -4,7 +4,6 @@ CREATE PROCEDURE InsereSistema(vNome VARCHAR(80),OUT id INT)
 BEGIN
         INSERT INTO Sistema (nome)
         VALUES (vNome);
-
         SET id = LAST_INSERT_ID();
 END //
 DELIMITER ;
