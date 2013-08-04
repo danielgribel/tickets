@@ -16,5 +16,5 @@ public interface IUsuarioDAO {
     public boolean atualiza(Usuario usuario);
     public boolean remove(String email);
     public Usuario getUsuario(String email);
-    public List<String> listarEmailsPorPerfil(Usuario.Perfil perfil);
+    public List<Usuario> listarUsuariosPorPerfil(Usuario.Perfil perfil);
 }

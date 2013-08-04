@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,7 +21,7 @@ import java.sql.Types;
  */
 public class SistemaDAO implements ISistemaDAO{
     
-    private Sistema carrega(ResultSet rs)throws SQLException{
+    private Sistema carrega(ResultSet rs)throws SQLException {
         Sistema sistema = new Sistema();
         sistema.setId(rs.getInt("id"));
         sistema.setNome(rs.getString("nome"));
@@ -27,7 +29,7 @@ public class SistemaDAO implements ISistemaDAO{
     }
     
     @Override
-    public Sistema getSistema(int id){
+    public Sistema getSistema(int id) {
         Connection c = SuporteDAO.getConnection();
         if(c == null)
         {
@@ -50,6 +52,28 @@ public class SistemaDAO implements ISistemaDAO{
         }
         
         return sistema;
+    }
+    
+    @Override
+    public List<Sistema> listarSistemas() {
+        Connection c = SuporteDAO.getConnection();
+        if(c == null) {
+            return null;
+        }
+        List<Sistema> sistemas = new ArrayList<Sistema>();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Sistema");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                sistemas.add(carrega(rs));
+            }
+            c.close();
+        }
+        catch(SQLException e){
+            SuporteDAO.log(e.getMessage());
+        }
+        
+        return sistemas;
     }
     
     @Override
@@ -82,10 +106,10 @@ public class SistemaDAO implements ISistemaDAO{
         {
             return false;
         }
-        try{
-            CallableStatement cs = c.prepareCall("{AtualizaSistema(?,?)}");
+        try {
+            CallableStatement cs = c.prepareCall("{call AtualizaSistema(?,?)}");
             cs.setInt(1, sistema.getId());
-            cs.setString(2,sistema.getNome());
+            cs.setString(2, sistema.getNome());
             cs.execute();
             c.close();
             return true;

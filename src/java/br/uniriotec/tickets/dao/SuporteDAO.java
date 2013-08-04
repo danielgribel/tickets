@@ -17,7 +17,7 @@ public class SuporteDAO {
     public static Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/tickets", "root", "admin");
+            Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/tickets", "root", "");
             conexao.setCatalog("tickets");
             return conexao;
         } catch(SQLException e) {
