@@ -117,11 +117,17 @@ label, .errorMessage {
     margin-bottom: 5px;
 }
 
-.tituloTicket {
+.tituloTicket, .tituloSistema {
     display: block;
 }
 
 #novoTicket {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#listaSistema {
     font-size: 20px;
     margin-top: 10px;
     margin-bottom: 10px;

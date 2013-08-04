@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -64,8 +66,12 @@ public class SistemaDAO implements ISistemaDAO{
             CallableStatement cs = c.prepareCall("{call InsereSistema(?,?)}");
             cs.setString(1, sistema.getNome());
             cs.registerOutParameter(2, Types.INTEGER);
-            c.close();
+            cs.execute();
             
+            int id = cs.getInt(2);
+            sistema.setId(id);
+            
+            c.close();
             return true;
         }
         catch(SQLException e){
@@ -83,7 +89,7 @@ public class SistemaDAO implements ISistemaDAO{
             return false;
         }
         try{
-            CallableStatement cs = c.prepareCall("{AtualizaSistema(?,?)}");
+            CallableStatement cs = c.prepareCall("{call AtualizaSistema(?,?)}");
             cs.setInt(1, sistema.getId());
             cs.setString(2,sistema.getNome());
             cs.execute();
@@ -97,8 +103,50 @@ public class SistemaDAO implements ISistemaDAO{
     }
     
     @Override
+    public List<Sistema> lista(int pagina, int tamanho){
+        Connection c = SuporteDAO.getConnection();
+        
+        if(c == null){
+            return null;
+        }
+        
+        List<Sistema> lista = new ArrayList<Sistema>();
+        
+        try{
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Sistema");//ORDER BY nome LIMIT ? OFFSET ?");
+            //ps.setInt(1, 1);
+            //ps.setInt(2, 25);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                lista.add(carrega(rs));
+            }
+            c.close();
+        }catch(SQLException e){
+            SuporteDAO.log(e.getMessage());
+        }
+     
+        return lista;
+    }
+    
+    @Override
     public boolean remove(int id){
-        return false;
+        Connection c = SuporteDAO.getConnection();
+        
+        if(c == null){
+            return false;
+        }
+        
+        try{
+            CallableStatement cs = c.prepareCall("{call RemoveSistema(?)}");
+            cs.setInt(1,id);
+            cs.execute();
+            c.close();
+            return true;
+        }catch(SQLException e){
+            SuporteDAO.log(e.getMessage());
+            return false;
+        }
     }
     
 }

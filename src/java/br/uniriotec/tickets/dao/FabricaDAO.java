@@ -19,6 +19,7 @@ public class FabricaDAO {
     
     private static IUsuarioDAO usuarioDAO;
     private static ITicketDAO ticketDAO;
+    private static ISistemaDAO sistemaDAO;
     
     public static IUsuarioDAO getUsuarioDAO() {
         if (usuarioDAO == null) {
@@ -34,12 +35,23 @@ public class FabricaDAO {
         return ticketDAO;
     }
     
+    public static ISistemaDAO getSistemaDAO(){
+        if(sistemaDAO == null){
+            sistemaDAO = new SistemaDAO();
+        }
+        return sistemaDAO;
+    }
+    
     public static void setUsuarioDAO(IUsuarioDAO usuarioDAO) {
         FabricaDAO.usuarioDAO = usuarioDAO;
     }
     
     public static void setTicketDAO(ITicketDAO ticketDAO) {
         FabricaDAO.ticketDAO = ticketDAO;
+    }
+    
+    public static void setSistemaDAO(ISistemaDAO sistemaDAO){
+        FabricaDAO.sistemaDAO = sistemaDAO;
     }
     
 }

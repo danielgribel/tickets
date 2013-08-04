@@ -21,3 +21,10 @@ CREATE TABLE Ticket
     operador VARCHAR(80) NOT NULL,
     PRIMARY KEY(id_ticket)
 );
+
+CREATE TABLE Sistema
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(80),
+    PRIMARY KEY(id)
+);

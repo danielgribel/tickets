@@ -27,6 +27,15 @@
             <result name="input">/formTicket.jsp</result>
         </action>
         
+        <action name="salvarSistema" method="salvarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <result name="success" type="redirect">/index.html</result>
+            <result name="input">/formsistema.jsp</result>
+        </action>
+        
+        <action name="listarSistema" method="listarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <result>/listsistem.jsp</result>
+        </action>
+        
 <!--        <action name="login" method="login" class="br.uniriotec.tickets.action.LoginAction">
             <result name="success">/home.jsp</result>
             <result name="error">/login.jsp</result>
@@ -94,14 +103,23 @@
             <result name="input">/formTicket.jsp</result>
         </action>
         
+        
+        
         <action name="editarTicket" method="editarTicket" class="br.uniriotec.tickets.action.TicketAction">
             <result name="input">/formTicket.jsp</result>
+        </action>
+        
+        <action name="editarSistema" method="editar" class="br.uniriotec.tickets.action.SistemaAction">
+            <result name="input">/formsistema.jsp</result>
         </action>
         
 <!--        <action name="resultAction" class="br.uniriotec.tickets.action.SelectAction">
             <result name="success">/index.html</result>
         </action>-->
         
+        <action name="deleteSistema" method="delete" class="br.uniriotec.tickets.action.SistemaAction">
+            <result name="success">/home.jsp</result>
+        </action>
     </package>
     
 </struts>
