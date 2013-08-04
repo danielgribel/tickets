@@ -8,6 +8,8 @@ import br.uniriotec.tickets.dao.ticket.ITicketDAO;
 import br.uniriotec.tickets.dao.ticket.TicketDAO;
 import br.uniriotec.tickets.dao.usuario.IUsuarioDAO;
 import br.uniriotec.tickets.dao.usuario.UsuarioDAO;
+import br.uniriotec.tickets.dao.sistema.SistemaDAO;
+import br.uniriotec.tickets.dao.sistema.ISistemaDAO;
 
 /**
  *
