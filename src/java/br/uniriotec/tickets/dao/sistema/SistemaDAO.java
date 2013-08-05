@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author Pedro
  */
-public class SistemaDAO implements ISistemaDAO{
+public class SistemaDAO implements ISistemaDAO {
     
     private Sistema carrega(ResultSet rs)throws SQLException {
         Sistema sistema = new Sistema();
@@ -31,23 +31,20 @@ public class SistemaDAO implements ISistemaDAO{
     @Override
     public Sistema getSistema(int id) {
         Connection c = SuporteDAO.getConnection();
-        if(c == null)
-        {
+        if(c == null) {
             return null;
         }
         
         Sistema sistema = null;
-        try{
+        try {
             PreparedStatement ps = c.prepareStatement("SELECT * FROM Sistema WHERE id = ?");
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
-            if(rs.next())
-            {
+            if(rs.next()) {
                 sistema = carrega(rs);
             }
             c.close();
-        }
-        catch(SQLException e){
+        } catch(SQLException e) {
             SuporteDAO.log(e.getMessage());
         }
         
@@ -77,14 +74,13 @@ public class SistemaDAO implements ISistemaDAO{
     }
     
     @Override
-    public boolean insere(Sistema sistema){
+    public boolean insere(Sistema sistema) {
         Connection c = SuporteDAO.getConnection();
-        if(c == null)
-        {
+        if(c == null) {
             return false;
         }
         
-        try{
+        try {
             CallableStatement cs = c.prepareCall("{call InsereSistema(?,?)}");
             cs.setString(1, sistema.getNome());
             cs.registerOutParameter(2, Types.INTEGER);
@@ -95,19 +91,16 @@ public class SistemaDAO implements ISistemaDAO{
             
             c.close();
             return true;
-        }
-        catch(SQLException e){
+        } catch(SQLException e) {
             SuporteDAO.log(e.getMessage());
-            
             return false;
         }
     }
     
     @Override
-    public boolean atualiza(Sistema sistema){
+    public boolean atualiza(Sistema sistema) {
         Connection c = SuporteDAO.getConnection();
-        if(c == null)
-        {
+        if(c == null) {
             return false;
         }
         try {
@@ -117,55 +110,53 @@ public class SistemaDAO implements ISistemaDAO{
             cs.execute();
             c.close();
             return true;
-        }
-        catch(SQLException e){
+        } catch(SQLException e) {
             SuporteDAO.log(e.getMessage());
             return false;
         }
     }
     
-    @Override
-    public List<Sistema> lista(int pagina, int tamanho){
-        Connection c = SuporteDAO.getConnection();
-        
-        if(c == null){
-            return null;
-        }
-        
-        List<Sistema> lista = new ArrayList<Sistema>();
-        
-        try{
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM Sistema");//ORDER BY nome LIMIT ? OFFSET ?");
-            //ps.setInt(1, 1);
-            //ps.setInt(2, 25);
-            ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
-                lista.add(carrega(rs));
-            }
-            c.close();
-        }catch(SQLException e){
-            SuporteDAO.log(e.getMessage());
-        }
-     
-        return lista;
-    }
+//    public List<Sistema> lista(int pagina, int tamanho) {
+//        Connection c = SuporteDAO.getConnection();
+//        
+//        if(c == null){
+//            return null;
+//        }
+//        
+//        List<Sistema> lista = new ArrayList<Sistema>();
+//        
+//        try{
+//            PreparedStatement ps = c.prepareStatement("SELECT * FROM Sistema");//ORDER BY nome LIMIT ? OFFSET ?");
+//            //ps.setInt(1, 1);
+//            //ps.setInt(2, 25);
+//            ResultSet rs = ps.executeQuery();
+//            
+//            while(rs.next()){
+//                lista.add(carrega(rs));
+//            }
+//            c.close();
+//        }catch(SQLException e){
+//            SuporteDAO.log(e.getMessage());
+//        }
+//     
+//        return lista;
+//    }
     
     @Override
-    public boolean remove(int id){
+    public boolean remove(int id) {
         Connection c = SuporteDAO.getConnection();
         
-        if(c == null){
+        if(c == null) {
             return false;
         }
         
-        try{
+        try {
             CallableStatement cs = c.prepareCall("{call RemoveSistema(?)}");
             cs.setInt(1,id);
             cs.execute();
             c.close();
             return true;
-        }catch(SQLException e){
+        } catch(SQLException e) {
             SuporteDAO.log(e.getMessage());
             return false;
         }
