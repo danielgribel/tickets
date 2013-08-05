@@ -4,6 +4,7 @@ import br.uniriotec.tickets.dao.FabricaDAO;
 import br.uniriotec.tickets.model.Componente;
 import br.uniriotec.tickets.model.Sistema;
 import br.uniriotec.tickets.model.Ticket;
+import br.uniriotec.tickets.model.Ticket.Status;
 import br.uniriotec.tickets.model.Usuario;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.NONE;
@@ -27,23 +28,29 @@ public class TicketAction extends ActionSupport implements RequestAware {
     private int componente;
     private String descricao;
     private String operador;
+    private String status;
     
     private List<Sistema> listaSistemas;
     private List<Componente> listaComponentes;
     private List<Usuario> listaOperadores;
+    private List<String> listaStatus;
     
     public TicketAction() {
-        
         this.idTicket = -1;
-        
+
         listaSistemas = new ArrayList<Sistema>();
         listaSistemas = FabricaDAO.getSistemaDAO().listarSistemas();
-        
+
         listaComponentes = new ArrayList<Componente>();
         listaComponentes = FabricaDAO.getComponenteDAO().listarComponentes();
         
         listaOperadores = new ArrayList<Usuario>();
         listaOperadores = FabricaDAO.getUsuarioDAO().listarUsuariosPorPerfil(Usuario.Perfil.OPERADOR);
+        
+        listaStatus = new ArrayList<String>();
+        for(Status s : Status.values()) {
+            listaStatus.add(s.toString());
+        }
     }
 
     public int getIdTicket() {
@@ -93,6 +100,14 @@ public class TicketAction extends ActionSupport implements RequestAware {
     public void setOperador(String operador) {
         this.operador = operador;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     
     public String salvarTicket() {
         Ticket ticket = new Ticket();
@@ -105,6 +120,8 @@ public class TicketAction extends ActionSupport implements RequestAware {
         ticket.setStatus(Ticket.Status.NOVO);
         request.put("ticket", ticket);
 
+        Componente componenteSelecionado = FabricaDAO.getComponenteDAO().getComponente(componente);
+        
         if(titulo.length() == 0) {
             addFieldError("titulo", getText("erro.titulo.obrigatorio"));
         }
@@ -113,6 +130,9 @@ public class TicketAction extends ActionSupport implements RequestAware {
         }
         if(componente <= 0) {
             addFieldError("componente", getText("erro.componente.obrigatorio"));
+        }
+        else if(componenteSelecionado.getSistema() != sistema) {
+            addFieldError("componente", getText("erro.componente.sistemaIncorreto"));
         }
         if(operador.equals("-1")) {
             addFieldError("operador", getText("erro.operador.obrigatorio"));
@@ -127,7 +147,23 @@ public class TicketAction extends ActionSupport implements RequestAware {
             FabricaDAO.getTicketDAO().atualiza(ticket);
         }
         return SUCCESS;
-    }    
+    }
+    
+    public String salvarStatus() {
+        Ticket ticket = new Ticket();
+        ticket.setIdTicket(idTicket);
+        ticket.setTitulo(titulo);
+        ticket.setSistema(sistema);
+        ticket.setComponente(componente);
+        ticket.setDescricao(descricao);
+        ticket.setOperador(operador);
+        ticket.setStatus(Status.valueOf(status));
+        request.put("ticket", ticket);
+        
+        FabricaDAO.getTicketDAO().atualiza(ticket);
+        
+        return SUCCESS;
+    }
     
     @Override
     public void setRequest(Map<String, Object> requisicao) {
@@ -157,6 +193,14 @@ public class TicketAction extends ActionSupport implements RequestAware {
     public void setListaOperadores(List<Usuario> listaOperadores) {
         this.listaOperadores = listaOperadores;
     }
+
+    public List<String> getListaStatus() {
+        return listaStatus;
+    }
+
+    public void setListaStatus(List<String> listaStatus) {
+        this.listaStatus = listaStatus;
+    }    
     
 //    public String getDefaultOperador() {
 //        String emailOperador = ((Ticket)request.get("ticket")).getOperador();

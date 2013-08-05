@@ -7,6 +7,7 @@
 <%@include file="cabecalho.jsp"%>
 <div id="content">
     <%@include file="cabecalhoHome.jsp"%>
+    <%@include file="menuAdministrador.jsp"%>
     <h2><s:text name="menu.alteracaoDados"/></h2>
     <s:div>
         <s:actionerror />

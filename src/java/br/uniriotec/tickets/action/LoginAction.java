@@ -2,6 +2,7 @@ package br.uniriotec.tickets.action;
 
 import br.uniriotec.tickets.dao.FabricaDAO;
 import br.uniriotec.tickets.model.Usuario;
+import br.uniriotec.tickets.model.Usuario.Perfil;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
@@ -99,6 +100,21 @@ public class LoginAction extends ActionSupport implements SessionAware {
                 Timestamp ts = new Timestamp(System.currentTimeMillis());
                 String s = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(ts);
                 session.put("ultimoLogin", s);
+                if(u.getPerfil() == Perfil.ADMIN) {
+                    session.put("menuAdministradores", "visible");
+                    session.put("areaTicketsFinal", "none");
+                    session.put("areaTicketsOperador", "none");
+                }
+                else if(u.getPerfil() == Perfil.OPERADOR) {
+                    session.put("menuAdministradores", "hidden");
+                    session.put("areaTicketsFinal", "none");
+                    session.put("areaTicketsOperador", "block");
+                }
+                else if(u.getPerfil() == Perfil.FINAL) {
+                    session.put("menuAdministradores", "hidden");
+                    session.put("areaTicketsFinal", "block");
+                    session.put("areaTicketsOperador", "none");
+                }
                 return SUCCESS;
             }
             else {

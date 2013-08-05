@@ -15,7 +15,7 @@ BEGIN
         UPDATE Componente
         SET nome = vNome,
         sistema = vSistema,
-        vOperador = operador
+        operador = vOperador
         WHERE id_componente = vIdComponente;
 END //
 DELIMITER ;

@@ -53,19 +53,19 @@ public class UsuarioDAO implements IUsuarioDAO {
         if(c == null) {
             return null;
         }
-        List<Usuario> emails = new ArrayList<Usuario>();
+        List<Usuario> usuarios = new ArrayList<Usuario>();
         try {
             PreparedStatement ps = c.prepareStatement("SELECT * FROM Usuario WHERE perfil = ?");
             ps.setString(1, perfil.toString());
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                emails.add(carrega(rs));
+                usuarios.add(carrega(rs));
             }
             c.close();
         } catch(SQLException e) {
             SuporteDAO.log(e.getMessage());
         }
-        return emails;
+        return usuarios;
     }
     
     @Override
@@ -110,6 +110,26 @@ public class UsuarioDAO implements IUsuarioDAO {
             SuporteDAO.log(e.getMessage());
             return false;
         }
+    }
+    
+    @Override
+    public List<Usuario> listarUsuarios() {
+        Connection c = SuporteDAO.getConnection();
+        if(c == null) {
+            return null;
+        }
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Usuario");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                usuarios.add(carrega(rs));
+            }
+            c.close();
+        } catch(SQLException e) {
+            SuporteDAO.log(e.getMessage());
+        }
+        return usuarios;
     }
     
     @Override

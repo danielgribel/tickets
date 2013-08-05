@@ -5,6 +5,7 @@
 --%>
 
 <%@include file="cabecalho.jsp"%>
+<%@include file="menuAdministrador.jsp"%>
 <div id="content">
     <h2><s:text name="menu.cadastro.sistema"/></h2>
     <table id="tabelaSistemas"/>

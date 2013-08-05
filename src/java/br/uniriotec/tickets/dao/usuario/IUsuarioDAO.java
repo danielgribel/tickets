@@ -17,4 +17,5 @@ public interface IUsuarioDAO {
     public boolean remove(String email);
     public Usuario getUsuario(String email);
     public List<Usuario> listarUsuariosPorPerfil(Usuario.Perfil perfil);
+    public List<Usuario> listarUsuarios();
 }

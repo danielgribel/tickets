@@ -77,4 +77,9 @@ public class UsuarioAction extends ActionSupport implements RequestAware {
         this.request = requisicao;
     }
     
+    public String listarUsuarios() {
+        request.put("usuarios", FabricaDAO.getUsuarioDAO().listarUsuarios());
+        return SUCCESS;
+    }
+    
 }

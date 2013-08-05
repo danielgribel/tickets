@@ -126,3 +126,20 @@ label, .errorMessage {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.menuAdm {
+    visibility: visible;
+    
+}
+
+.menuOther {
+    visibility: hidden;
+}
+
+.menuAdm a {
+    margin-right: 10px;
+}
+
+.menuOther a {
+    color: red;
+}
