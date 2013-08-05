@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.uniriotec.tickets.action;
 
 import br.uniriotec.tickets.dao.FabricaDAO;
@@ -60,7 +56,7 @@ public class SistemaAction extends ActionSupport implements RequestAware{
             addFieldError("nome",getText("erro.nome.sistema.obrigatorio"));
         }
         
-        if(hasErrors()){
+        if(hasErrors()) {
             return INPUT;
         }
         

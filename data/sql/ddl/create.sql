@@ -21,10 +21,17 @@ CREATE TABLE Ticket
     operador VARCHAR(80) NOT NULL,
     PRIMARY KEY(id_ticket)
 );
-
 CREATE TABLE Sistema
 (
     id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(80),
     PRIMARY KEY(id)
+);
+CREATE TABLE Componente
+(
+    id_componente INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(80),
+    sistema INT NOT NULL,
+    operador VARCHAR(80) NOT NULL,
+    PRIMARY KEY(id_componente)
 );

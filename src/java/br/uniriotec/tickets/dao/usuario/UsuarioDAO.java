@@ -48,18 +48,18 @@ public class UsuarioDAO implements IUsuarioDAO {
     }
     
     @Override
-    public List<String> listarEmailsPorPerfil(Usuario.Perfil perfil) {
+    public List<Usuario> listarUsuariosPorPerfil(Usuario.Perfil perfil) {
         Connection c = SuporteDAO.getConnection();
         if(c == null) {
             return null;
         }
-        List<String> emails = new ArrayList<String>();
+        List<Usuario> emails = new ArrayList<Usuario>();
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT email FROM Usuario WHERE perfil = ?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Usuario WHERE perfil = ?");
             ps.setString(1, perfil.toString());
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                emails.add(rs.getString("email"));
+            while(rs.next()) {
+                emails.add(carrega(rs));
             }
             c.close();
         } catch(SQLException e) {

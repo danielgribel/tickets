@@ -1,6 +1,8 @@
 package br.uniriotec.tickets.action;
 
 import br.uniriotec.tickets.dao.FabricaDAO;
+import br.uniriotec.tickets.model.Componente;
+import br.uniriotec.tickets.model.Sistema;
 import br.uniriotec.tickets.model.Ticket;
 import br.uniriotec.tickets.model.Usuario;
 import static com.opensymphony.xwork2.Action.INPUT;
@@ -21,32 +23,27 @@ public class TicketAction extends ActionSupport implements RequestAware {
     private Map<String, Object> request;
     private int idTicket;
     private String titulo;
-    private String sistema;
-    private String componente;
+    private int sistema;
+    private int componente;
     private String descricao;
     private String operador;
     
-    private List<String> listaSistemas;
-    private List<String> listaComponentes;
-    private List<String> listaOperadores;
+    private List<Sistema> listaSistemas;
+    private List<Componente> listaComponentes;
+    private List<Usuario> listaOperadores;
     
     public TicketAction() {
         
         this.idTicket = -1;
         
-        listaSistemas = new ArrayList<String>();
-        listaSistemas.add("Google Docs");
-        listaSistemas.add("Word");
-        listaSistemas.add("Libre Office");
+        listaSistemas = new ArrayList<Sistema>();
+        listaSistemas = FabricaDAO.getSistemaDAO().listarSistemas();
         
-        listaComponentes = new ArrayList<String>();
-        listaComponentes.add("Front-end");
-        listaComponentes.add("Back-end");
-        listaComponentes.add("Projeto");
-        listaComponentes.add("Analise");
+        listaComponentes = new ArrayList<Componente>();
+        listaComponentes = FabricaDAO.getComponenteDAO().listarComponentes();
         
-        listaOperadores = new ArrayList<String>();
-        listaOperadores = FabricaDAO.getUsuarioDAO().listarEmailsPorPerfil(Usuario.Perfil.OPERADOR);
+        listaOperadores = new ArrayList<Usuario>();
+        listaOperadores = FabricaDAO.getUsuarioDAO().listarUsuariosPorPerfil(Usuario.Perfil.OPERADOR);
     }
 
     public int getIdTicket() {
@@ -65,19 +62,19 @@ public class TicketAction extends ActionSupport implements RequestAware {
         this.titulo = titulo;
     }
 
-    public String getSistema() {
+    public int getSistema() {
         return sistema;
     }
 
-    public void setSistema(String sistema) {
+    public void setSistema(int sistema) {
         this.sistema = sistema;
     }
 
-    public String getComponente() {
+    public int getComponente() {
         return componente;
     }
 
-    public void setComponente(String componente) {
+    public void setComponente(int componente) {
         this.componente = componente;
     }
 
@@ -101,8 +98,8 @@ public class TicketAction extends ActionSupport implements RequestAware {
         Ticket ticket = new Ticket();
         ticket.setIdTicket(idTicket);
         ticket.setTitulo(titulo);
-        ticket.setSistema(1);
-        ticket.setComponente(1);
+        ticket.setSistema(sistema);
+        ticket.setComponente(componente);
         ticket.setDescricao(descricao);
         ticket.setOperador(operador);
         ticket.setStatus(Ticket.Status.NOVO);
@@ -111,10 +108,10 @@ public class TicketAction extends ActionSupport implements RequestAware {
         if(titulo.length() == 0) {
             addFieldError("titulo", getText("erro.titulo.obrigatorio"));
         }
-        if(sistema.equals("-1")) {
+        if(sistema <= 0) {
             addFieldError("sistema", getText("erro.sistema.obrigatorio"));
         }
-        if(componente.equals("-1")) {
+        if(componente <= 0) {
             addFieldError("componente", getText("erro.componente.obrigatorio"));
         }
         if(operador.equals("-1")) {
@@ -137,40 +134,33 @@ public class TicketAction extends ActionSupport implements RequestAware {
         this.request = requisicao;
     }
     
-    public List<String> getListaSistemas() {
+    public List<Sistema> getListaSistemas() {
         return listaSistemas;
     }
 
-    public void setListaSistemas(List<String> listaSistemas) {
+    public void setListaSistemas(List<Sistema> listaSistemas) {
         this.listaSistemas = listaSistemas;
     }
 
-    public List<String> getListaComponentes() {
+    public List<Componente> getListaComponentes() {
         return listaComponentes;
     }
 
-    public void setListaComponentes(List<String> listaComponentes) {
+    public void setListaComponentes(List<Componente> listaComponentes) {
         this.listaComponentes = listaComponentes;
     }
 
-    public List<String> getListaOperadores() {
+    public List<Usuario> getListaOperadores() {
         return listaOperadores;
     }
 
-    public void setListaOperadores(List<String> listaOperadores) {
+    public void setListaOperadores(List<Usuario> listaOperadores) {
         this.listaOperadores = listaOperadores;
     }
     
-//    public String getDefaultSistema() {
-//        return "";
-//    }
-//    
-//    public String getDefaultComponente() {
-//        return "";
-//    }
-//    
 //    public String getDefaultOperador() {
-//        return "";
+//        String emailOperador = ((Ticket)request.get("ticket")).getOperador();
+//        return emailOperador;
 //    }
     
     public String display() {

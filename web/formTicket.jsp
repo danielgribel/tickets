@@ -14,19 +14,25 @@
         <s:select key="label.ticket.sistema"
 		headerKey="-1" headerValue="Selecione o sistema"
 		list="listaSistemas"
-		name="sistema"
-		value="defaultSistema" />
+		listValue="nome"
+                listKey="id"
+                name="sistema" 
+                value="%{#request.ticket.sistema}" />
         <s:select key="label.ticket.componente"
 		headerKey="-1" headerValue="Selecione o componente"
 		list="listaComponentes"
+                listValue="nome"
+                listKey="idComponente"
 		name="componente"
-		value="defaultComponente" />
+		value="%{#request.ticket.componente}" />
         <s:textfield key="label.ticket.descricao" name="descricao" value="%{#request.ticket.descricao}" />
         <s:select key="label.ticket.operador"
 		headerKey="-1" headerValue="Selecione o operador"
 		list="listaOperadores"
+                listValue="email"
+                listKey="email"
 		name="operador"
-		value="defaultOperador" />
+		value="%{#request.ticket.operador}" />
         <s:submit value="Salvar" />
     </s:form>
 </div>

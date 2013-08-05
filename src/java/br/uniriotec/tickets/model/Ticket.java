@@ -24,7 +24,7 @@ public class Ticket {
     public Ticket() {
     
     }
-    
+
     public Ticket(int idTicket, String titulo, int sistema, int componente, String descricao, String operador) {
         this.idTicket = idTicket;
         this.titulo = titulo;
