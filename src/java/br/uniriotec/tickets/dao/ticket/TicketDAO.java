@@ -127,6 +127,27 @@ public class TicketDAO implements ITicketDAO {
     }
 
     @Override
+    public List<Ticket> listarTicketsDoUsuario(String email) {
+        Connection c = SuporteDAO.getConnection();
+        if(c == null) {
+            return null;
+        }
+        List<Ticket> tickets = new ArrayList<Ticket>();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Ticket WHERE operador = ?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                tickets.add(carrega(rs));
+            }
+            c.close();
+        } catch(SQLException e) {
+            SuporteDAO.log(e.getMessage());
+        }
+        return tickets;
+    }
+    
+    @Override
     public boolean remove(int idTicket) {
         return false;
     }

@@ -6,6 +6,7 @@ import br.uniriotec.tickets.model.Sistema;
 import br.uniriotec.tickets.model.Ticket;
 import br.uniriotec.tickets.model.Ticket.Status;
 import br.uniriotec.tickets.model.Usuario;
+import br.uniriotec.tickets.model.Usuario.Perfil;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.NONE;
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -14,14 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
  * @author Daniel Gribel <daniel.gribel@uniriotec.br>
  */
-public class TicketAction extends ActionSupport implements RequestAware {
+public class TicketAction extends ActionSupport implements RequestAware, SessionAware {
 
     private Map<String, Object> request;
+    private Map<String, Object> session;
     private int idTicket;
     private String titulo;
     private int sistema;
@@ -200,7 +203,8 @@ public class TicketAction extends ActionSupport implements RequestAware {
 
     public void setListaStatus(List<String> listaStatus) {
         this.listaStatus = listaStatus;
-    }    
+    }
+    
     
 //    public String getDefaultOperador() {
 //        String emailOperador = ((Ticket)request.get("ticket")).getOperador();
@@ -217,7 +221,13 @@ public class TicketAction extends ActionSupport implements RequestAware {
     }
     
     public String listarTickets() {
-        request.put("tickets", FabricaDAO.getTicketDAO().listarTickets());
+        Usuario usuario = (Usuario)session.get("usuario");
+        if(usuario.getPerfil() == Perfil.FINAL) {
+            request.put("tickets", FabricaDAO.getTicketDAO().listarTickets());    
+        }
+        else if(usuario.getPerfil() == Perfil.OPERADOR) {
+            request.put("tickets", FabricaDAO.getTicketDAO().listarTicketsDoUsuario(usuario.getEmail()));
+        }
         return SUCCESS;
     }
     
@@ -229,6 +239,11 @@ public class TicketAction extends ActionSupport implements RequestAware {
     public String editarTicket() {
         request.put("ticket", FabricaDAO.getTicketDAO().getTicket(idTicket));
         return INPUT;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
     
 }

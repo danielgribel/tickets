@@ -20,6 +20,7 @@
                 <s:url id="editURL" action="editarTicket"><s:param name="idTicket"><s:property value="idTicket" /></s:param></s:url>
                 <a class="editar" href="<s:property value="editURL"/>">editar</a>
                 <s:url id="statusURL" action="editarStatusTicket"><s:param name="idTicket"><s:property value="idTicket" /></s:param></s:url>
+                <a class="editar" href="<s:property value="statusURL"/>">atualizar status</a>
                 <a class="itemLista" href="<s:property value="statusURL"/>"><s:property value="titulo" /></a>
             </div>
         </s:iterator>
@@ -29,6 +30,7 @@
         <s:iterator value="#request.tickets">
             <div class="lista">
                 <s:url id="statusURL" action="editarStatusTicket"><s:param name="idTicket"><s:property value="idTicket" /></s:param></s:url>
+                <a class="editar" href="<s:property value="statusURL"/>">atualizar status</a>
                 <a class="itemLista" href="<s:property value="statusURL"/>"><s:property value="titulo" /></a>
             </div>
         </s:iterator>

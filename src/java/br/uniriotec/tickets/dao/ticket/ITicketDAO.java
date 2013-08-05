@@ -14,4 +14,5 @@ public interface ITicketDAO {
     public boolean remove(int idTicket);
     public Ticket getTicket(int idTicket);
     public List<Ticket> listarTickets();
+    public List<Ticket> listarTicketsDoUsuario(String email);
 }
