@@ -6,6 +6,8 @@ package br.uniriotec.tickets.dao.sistema;
 import br.uniriotec.tickets.model.Sistema;
 import java.util.List;
 
+import br.uniriotec.tickets.model.Sistema;
+import java.util.List;
 /**
  *
  * @author Pedro

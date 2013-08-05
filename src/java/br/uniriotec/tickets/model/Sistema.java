@@ -12,8 +12,9 @@ public class Sistema {
         
     }
     
-    public Sistema(String nome){
+    public Sistema(String nome, int id){
         this.nome = nome;
+        this.id = id;
     }
     
     public String getNome(){

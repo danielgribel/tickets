@@ -49,6 +49,15 @@
             <result name="input">/alteracaoPerfil.jsp</result>
         </action>
         
+        <action name="salvarSistema" method="salvarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <result name="success" type="redirect">/index.html</result>
+            <result name="input">/formsistema.jsp</result>
+        </action>
+        
+        <action name="listarSistema" method="listarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <result>/listsistem.jsp</result>
+        </action>
+        
 <!--        <action name="login" method="login" class="br.uniriotec.tickets.action.LoginAction">
             <result name="success">/home.jsp</result>
             <result name="error">/login.jsp</result>
@@ -153,26 +162,23 @@
             <result name="input">/formTicket.jsp</result>
         </action>
         
+        
+        
         <action name="editarTicket" method="editarTicket" class="br.uniriotec.tickets.action.TicketAction">
             <result name="input">/formTicket.jsp</result>
+        </action>
+        
+        <action name="editarSistema" method="editar" class="br.uniriotec.tickets.action.SistemaAction">
+            <result name="input">/formsistema.jsp</result>
         </action>
         
         <action name="editarStatusTicket" method="editarTicket" class="br.uniriotec.tickets.action.TicketAction">
             <result name="input">/statusTicket.jsp</result>
         </action>
         
-        <action name="criarComponente" method="criarComponente" class="br.uniriotec.tickets.action.ComponenteAction">
-            <result name="input">/formComponente.jsp</result>
+        <action name="deleteSistema" method="delete" class="br.uniriotec.tickets.action.SistemaAction">
+            <result name="success">/home.jsp</result>
         </action>
-        
-        <action name="editarComponente" method="editarComponente" class="br.uniriotec.tickets.action.ComponenteAction">
-            <result name="input">/formComponente.jsp</result>
-        </action>
-    
-        <action name="alterarPerfil" method="alterarPerfil" class="br.uniriotec.tickets.action.PerfilAction">
-            <result name="input">/alteracaoPerfil.jsp</result>
-        </action>
-            
     </package>
     
 </struts>
