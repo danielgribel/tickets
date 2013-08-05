@@ -91,7 +91,7 @@ public class SistemaAction extends ActionSupport implements RequestAware {
         return INPUT;
     }
     
-    public String listarSistema() {
+    public String listarSistemas() {
         request.put("sistemas", FabricaDAO.getSistemaDAO().listarSistemas());
         return SUCCESS;
     }

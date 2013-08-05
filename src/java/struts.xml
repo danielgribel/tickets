@@ -16,12 +16,24 @@
                 <interceptor-ref name="defaultStack" />
             </interceptor-stack>
             
-            <interceptor name="perfilInterceptor2" class="br.uniriotec.tickets.interceptador.InterceptadorPerfil"/>
-            <interceptor-stack name="perfilInterceptor2">
-                <interceptor-ref name="perfilInterceptor2" />
+            <interceptor name="perfilAdm" class="br.uniriotec.tickets.interceptador.InterceptadorUsuarioAdm"/>
+            <interceptor-stack name="admStack">
+                <interceptor-ref name="perfilAdm" />
                 <interceptor-ref name="defaultStack" />
             </interceptor-stack>
             
+            <interceptor name="perfilConvencional" class="br.uniriotec.tickets.interceptador.InterceptadorUsuarioConvencional"/>
+            <interceptor-stack name="convencionalStack">
+                <interceptor-ref name="perfilConvencional" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+
+            <interceptor name="perfilFinal" class="br.uniriotec.tickets.interceptador.InterceptadorUsuarioFinal"/>
+            <interceptor-stack name="finalStack">
+                <interceptor-ref name="perfilFinal" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>    
+                                                                                                            
         </interceptors>
         
         <action name="salvarUsuario" method="salvarUsuario" class="br.uniriotec.tickets.action.UsuarioAction">
@@ -30,28 +42,43 @@
         </action>
         
         <action name="salvarTicket" method="salvarTicket" class="br.uniriotec.tickets.action.TicketAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="finalStack" />
             <result name="success" type="redirect">/index.html</result>
             <result name="input">/formTicket.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="salvarStatus" method="salvarStatus" class="br.uniriotec.tickets.action.TicketAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="convencionalStack" />
             <result name="success" type="redirect">/index.html</result>
             <result name="input">/statusTicket.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="salvarComponente" method="salvarComponente" class="br.uniriotec.tickets.action.ComponenteAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="success" type="redirect">/componentes</result>
             <result name="input">/formComponente.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="salvarPerfil" method="salvarPerfil" class="br.uniriotec.tickets.action.PerfilAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="success" type="redirect">/usuarios</result>
             <result name="input">/alteracaoPerfil.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="salvarSistema" method="salvarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="success" type="redirect">/sistemas</result>
             <result name="input">/formsistema.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
 <!--        <action name="login" method="login" class="br.uniriotec.tickets.action.LoginAction">
@@ -81,37 +108,42 @@
         
         <action name="ticket">
             <interceptor-ref name="secureStack" />
+            <interceptor-ref name="finalStack" />
             <result>/formTicket.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
         
         <action name="sistema">
             <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result>/formsistema.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
         
         <action name="componente">
             <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result>/formComponente.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
         
-        <action name="sistemas" method="listarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+        <action name="sistemas" method="listarSistemas" class="br.uniriotec.tickets.action.SistemaAction">
             <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result>/listsistem.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
         
         <action name="componentes" method="listarComponentes" class="br.uniriotec.tickets.action.ComponenteAction">
             <interceptor-ref name="secureStack" />
-            <interceptor-ref name="perfilInterceptor2" />
+            <interceptor-ref name="admStack" />
             <result>/componentes.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
         
         <action name="usuarios" method="listarUsuarios" class="br.uniriotec.tickets.action.UsuarioAction">
             <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result>/usuarios.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
@@ -150,47 +182,80 @@
         </action>
         
         <action name="criarTicket" method="criarTicket" class="br.uniriotec.tickets.action.TicketAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="finalStack" />
             <result name="input">/formTicket.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="editarTicket" method="editarTicket" class="br.uniriotec.tickets.action.TicketAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="finalStack" />
             <result name="input">/formTicket.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="editarSistema" method="editar" class="br.uniriotec.tickets.action.SistemaAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="input">/formsistema.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="editarStatusTicket" method="editarTicket" class="br.uniriotec.tickets.action.TicketAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="convencionalStack" />
             <result name="input">/statusTicket.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="removerSistema" method="removerSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="success">/index.html</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="removerComponente" method="removerComponente" class="br.uniriotec.tickets.action.ComponenteAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="success">/index.html</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="removerUsuario" method="removerUsuario" class="br.uniriotec.tickets.action.UsuarioAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="success">/index.html</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="criarSistema" method="criarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="input">/formsistema.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="criarComponente" method="criarComponente" class="br.uniriotec.tickets.action.ComponenteAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="input">/formComponente.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
         <action name="editarComponente" method="editarComponente" class="br.uniriotec.tickets.action.ComponenteAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="input">/formComponente.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
     
         <action name="alterarPerfil" method="alterarPerfil" class="br.uniriotec.tickets.action.PerfilAction">
+            <interceptor-ref name="secureStack" />
+            <interceptor-ref name="admStack" />
             <result name="input">/alteracaoPerfil.jsp</result>
+            <result name="login">/login.jsp</result>
         </action>
         
     </package>
