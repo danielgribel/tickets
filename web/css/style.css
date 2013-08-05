@@ -11,6 +11,10 @@ body {
     margin: 0;
 }
 
+body a, body a:hover, body a:visited {
+    color: #0099CC;
+}
+
 label, .errorMessage {
     font-size: 13px;
 }
@@ -117,8 +121,13 @@ label, .errorMessage {
     margin-bottom: 5px;
 }
 
-.tituloTitulo {
+.lista {
     display: block;
+    margin-bottom: 10px;
+}
+
+.lista a {
+    margin-right: 10px;
 }
 
 #novoTicket {
@@ -127,19 +136,19 @@ label, .errorMessage {
     margin-bottom: 10px;
 }
 
-.menuAdm {
-    visibility: visible;
-    
-}
-
-.menuOther {
-    visibility: hidden;
-}
-
-.menuAdm a {
+#menuAdm a {
     margin-right: 10px;
 }
 
-.menuOther a {
-    color: red;
+.remover, .remover:hover, .remover:visited {
+    color: #FF3300;
+}
+
+.editar, .editar:hover, .editar:visited {
+    color: #00688B;
+}
+
+.itemLista, .itemLista:hover, .itemLista:visited {
+    color: #555;
+    font-weight: bold;
 }

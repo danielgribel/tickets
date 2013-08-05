@@ -142,4 +142,9 @@ public class ComponenteAction extends ActionSupport implements RequestAware {
         return SUCCESS;
     }
     
+    public String removerComponente() {
+        FabricaDAO.getComponenteDAO().remove(idComponente);
+        return SUCCESS;
+    }
+    
 }

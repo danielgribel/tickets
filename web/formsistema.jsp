@@ -4,17 +4,14 @@
     Author     : Pedro
 --%>
 <%@include file="cabecalho.jsp"%>
-<%@include file="menuAdministrador.jsp"%>
 <div id="content">
+    <%@include file="cabecalhoHome.jsp"%>
+    <%@include file="menuAdministrador.jsp"%>
     <h2><s:text name="menu.cadastro.sistema" /></h2>
     <s:form action="salvarSistema" method="get">
         <s:hidden name="id" value="%{#request.sistema.id}" />
         <s:textfield key="label.sistema.nome" name="nome" value="%{#request.sistema.nome}" />
         <s:submit value="Salvar" />
     </s:form>
-</div>
-
-<div id="listaSistema">
-    <a href="<s:url action="listarSistema"/>"><s:text name="botao.lista.sistema"/></a>
 </div>
 <%@include file="rodape.jsp"%>

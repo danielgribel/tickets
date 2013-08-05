@@ -16,20 +16,20 @@
         </div>
         <h3>Tickets</h3>
         <s:iterator value="#request.tickets">
-            <div class="tituloTicket">
+            <div class="lista">
                 <s:url id="editURL" action="editarTicket"><s:param name="idTicket"><s:property value="idTicket" /></s:param></s:url>
-                <a href="<s:property value="editURL"/>">editar</a>
+                <a class="editar" href="<s:property value="editURL"/>">editar</a>
                 <s:url id="statusURL" action="editarStatusTicket"><s:param name="idTicket"><s:property value="idTicket" /></s:param></s:url>
-                <a href="<s:property value="statusURL"/>"><s:property value="titulo" /></a>
+                <a class="itemLista" href="<s:property value="statusURL"/>"><s:property value="titulo" /></a>
             </div>
         </s:iterator>
     </div>
     <div style="display: ${areaTicketsOperador}">
         <h3>Meus tickets</h3>
         <s:iterator value="#request.tickets">
-            <div class="tituloTicket">
+            <div class="lista">
                 <s:url id="statusURL" action="editarStatusTicket"><s:param name="idTicket"><s:property value="idTicket" /></s:param></s:url>
-                <a href="<s:property value="statusURL"/>"><s:property value="titulo" /></a>
+                <a class="itemLista" href="<s:property value="statusURL"/>"><s:property value="titulo" /></a>
             </div>
         </s:iterator>
     </div>

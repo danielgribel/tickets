@@ -134,7 +134,20 @@ public class UsuarioDAO implements IUsuarioDAO {
     
     @Override
     public boolean remove(String email) {
-        return false;
+        Connection c = SuporteDAO.getConnection();
+        if(c == null) {
+            return false;
+        }
+        try {
+            CallableStatement cs = c.prepareCall("{call RemoveUsuario(?)}");
+            cs.setString(1, email);
+            cs.execute();
+            c.close();
+            return true;
+        } catch(SQLException e) {
+            SuporteDAO.log(e.getMessage());
+            return false;
+        }
     }
     
 }

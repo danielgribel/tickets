@@ -96,7 +96,7 @@ public class SistemaAction extends ActionSupport implements RequestAware {
         return SUCCESS;
     }
     
-    public String delete() {
+    public String removerSistema() {
         FabricaDAO.getSistemaDAO().remove(id);
         return SUCCESS;
     }

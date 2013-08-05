@@ -82,4 +82,9 @@ public class UsuarioAction extends ActionSupport implements RequestAware {
         return SUCCESS;
     }
     
+    public String removerUsuario() {
+        FabricaDAO.getUsuarioDAO().remove(email);
+        return SUCCESS;
+    }
+    
 }

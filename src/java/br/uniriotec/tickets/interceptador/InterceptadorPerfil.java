@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.uniriotec.tickets.interceptador;
 
 import br.uniriotec.tickets.model.Usuario;
@@ -29,17 +25,6 @@ public class InterceptadorPerfil implements Interceptor {
 
     @Override
     public String intercept(ActionInvocation actionInvocation) throws Exception {
-        System.out.println("chamou default");
-        Map<String, Object> session = actionInvocation.getInvocationContext().getSession();
-        Usuario usuario = (Usuario) session.get("usuario");
-        if(usuario.getPerfil() != Perfil.ADMIN) {
-            return ActionSupport.NONE;
-        }
-        return actionInvocation.invoke();
-    }
-    
-    public String perfilInterceptor2(ActionInvocation actionInvocation) throws Exception {
-        System.out.println("chamou 2");
         Map<String, Object> session = actionInvocation.getInvocationContext().getSession();
         Usuario usuario = (Usuario) session.get("usuario");
         if(usuario.getPerfil() != Perfil.ADMIN) {

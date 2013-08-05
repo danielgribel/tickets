@@ -74,7 +74,20 @@ public class ComponenteDAO implements IComponenteDAO {
 
     @Override
     public boolean remove(int idComponente) {
-        return false;
+        Connection c = SuporteDAO.getConnection();
+        if(c == null) {
+            return false;
+        }
+        try {
+            CallableStatement cs = c.prepareCall("{call RemoveComponente(?)}");
+            cs.setInt(1, idComponente);
+            cs.execute();
+            c.close();
+            return true;
+        } catch(SQLException e) {
+            SuporteDAO.log(e.getMessage());
+            return false;
+        }
     }
 
     @Override

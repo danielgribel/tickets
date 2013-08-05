@@ -14,9 +14,12 @@
     </div>
     
     <s:iterator value="#request.componentes">
-        <div class="tituloTicket">
+        <div class="lista">
+            <s:url id="deleteURL" action="removerComponente"><s:param name="idComponente"><s:property value="idComponente"/></s:param></s:url>
+            <a class="remover" href="<s:property value="deleteURL"/>">remover</a>
             <s:url id="editURL" action="editarComponente"><s:param name="idComponente"><s:property value="idComponente" /></s:param></s:url>
-            <a href="<s:property value="editURL"/>"><s:property value="nome" /></a>
+            <a class="editar" href="<s:property value="editURL"/>">editar</a>
+            <a class="itemLista" href="<s:property value="editURL"/>"><s:property value="nome" /></a>
         </div>
     </s:iterator>
     

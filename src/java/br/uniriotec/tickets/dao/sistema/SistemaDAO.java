@@ -145,11 +145,9 @@ public class SistemaDAO implements ISistemaDAO {
     @Override
     public boolean remove(int id) {
         Connection c = SuporteDAO.getConnection();
-        
         if(c == null) {
             return false;
         }
-        
         try {
             CallableStatement cs = c.prepareCall("{call RemoveSistema(?)}");
             cs.setInt(1,id);

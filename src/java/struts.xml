@@ -50,12 +50,8 @@
         </action>
         
         <action name="salvarSistema" method="salvarSistema" class="br.uniriotec.tickets.action.SistemaAction">
-            <result name="success" type="redirect">/index.html</result>
+            <result name="success" type="redirect">/sistemas</result>
             <result name="input">/formsistema.jsp</result>
-        </action>
-        
-        <action name="listarSistema" method="listarSistema" class="br.uniriotec.tickets.action.SistemaAction">
-            <result>/listsistem.jsp</result>
         </action>
         
 <!--        <action name="login" method="login" class="br.uniriotec.tickets.action.LoginAction">
@@ -101,7 +97,7 @@
             <result name="login">/login.jsp</result>
         </action>
         
-        <action name="sistemas">
+        <action name="sistemas" method="listarSistema" class="br.uniriotec.tickets.action.SistemaAction">
             <interceptor-ref name="secureStack" />
             <result>/listsistem.jsp</result>
             <result name="login">/login.jsp</result>
@@ -152,11 +148,6 @@
             <result>/home.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
-                
-<!--        <action name="editarTicket" class="br.uniriotec.tickets.action.TicketAction" method="display">
-            <result name="none">/formTicket.jsp</result>
-            <result name="success" type="redirect">/home</result>
-        </action>-->
         
         <action name="criarTicket" method="criarTicket" class="br.uniriotec.tickets.action.TicketAction">
             <result name="input">/formTicket.jsp</result>
@@ -174,8 +165,20 @@
             <result name="input">/statusTicket.jsp</result>
         </action>
         
-        <action name="deleteSistema" method="delete" class="br.uniriotec.tickets.action.SistemaAction">
-            <result name="success">/home.jsp</result>
+        <action name="removerSistema" method="removerSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <result name="success">/index.html</result>
+        </action>
+        
+        <action name="removerComponente" method="removerComponente" class="br.uniriotec.tickets.action.ComponenteAction">
+            <result name="success">/index.html</result>
+        </action>
+        
+        <action name="removerUsuario" method="removerUsuario" class="br.uniriotec.tickets.action.UsuarioAction">
+            <result name="success">/index.html</result>
+        </action>
+        
+        <action name="criarSistema" method="criarSistema" class="br.uniriotec.tickets.action.SistemaAction">
+            <result name="input">/formsistema.jsp</result>
         </action>
         
         <action name="criarComponente" method="criarComponente" class="br.uniriotec.tickets.action.ComponenteAction">
