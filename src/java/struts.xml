@@ -214,6 +214,7 @@
             <interceptor-ref name="admStack" />
             <result name="success">/index.html</result>
             <result name="login">/login.jsp</result>
+<!--            <result name="input">/listsistem.jsp</result>-->
         </action>
         
         <action name="removerComponente" method="removerComponente" class="br.uniriotec.tickets.action.ComponenteAction">

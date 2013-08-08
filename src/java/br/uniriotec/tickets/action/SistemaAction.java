@@ -1,7 +1,9 @@
 package br.uniriotec.tickets.action;
 
 import br.uniriotec.tickets.dao.FabricaDAO;
+import br.uniriotec.tickets.model.Componente;
 import br.uniriotec.tickets.model.Sistema;
+import br.uniriotec.tickets.model.Ticket;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
@@ -97,12 +99,37 @@ public class SistemaAction extends ActionSupport implements RequestAware {
     }
     
     public String removerSistema() {
-        FabricaDAO.getSistemaDAO().remove(id);
+        FabricaDAO.getSistemaDAO().remove(id);    
         return SUCCESS;
+//        List<Ticket> tickets = FabricaDAO.getTicketDAO().listarTickets();
+//        List<Componente> componentes = FabricaDAO.getComponenteDAO().listarComponentes();
+//        if(!estaAssociado(tickets, componentes)) {
+//            FabricaDAO.getSistemaDAO().remove(id);    
+//            return SUCCESS;
+//        }
+//        else {
+//            addActionError("Sistema esta associado a tickets ou componentes");
+//            return INPUT;    
+//        }
+        
     }
     
     @Override
     public void setRequest(Map<String, Object> requisicao) {
         this.request = requisicao;
+    }
+    
+    private boolean estaAssociado(List<Ticket>tickets, List<Componente>componentes) {
+        for(Ticket t : tickets) {
+            if(t.getSistema()==id) {
+                return true;
+            }
+        }
+        for(Componente c : componentes) {
+            if(c.getSistema()==id) {
+                return true;
+            }
+        }
+        return false;
     }
 }

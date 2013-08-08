@@ -120,7 +120,7 @@ public class TicketAction extends ActionSupport implements RequestAware, Session
         ticket.setComponente(componente);
         ticket.setDescricao(descricao);
         ticket.setOperador(operador);
-        ticket.setStatus(Ticket.Status.NOVO);
+        ticket.setStatus(Ticket.Status.ABERTO);
         request.put("ticket", ticket);
 
         Componente componenteSelecionado = FabricaDAO.getComponenteDAO().getComponente(componente);

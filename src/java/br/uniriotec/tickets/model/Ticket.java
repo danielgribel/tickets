@@ -14,7 +14,7 @@ public class Ticket {
     private Status status;
     
     public enum Status {
-        NOVO,
+        ABERTO,
         RESOLVIDO,
         INVALIDADO,
         REABERTO,
@@ -32,7 +32,7 @@ public class Ticket {
         this.componente = componente;
         this.descricao = descricao;
         this.operador = operador;
-        this.status = Status.NOVO;
+        this.status = Status.ABERTO;
     }
 
     public int getIdTicket() {

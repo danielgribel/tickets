@@ -12,7 +12,7 @@
     <span id="boasVindas">Bem-vindo(a) <s:property value="#session['usuario'].nome" /></span>
     <div style="display: ${areaTicketsFinal}">
         <div id="novoTicket">
-            <a href="<s:url action="criarTicket"/>"><s:text name="botao.ticket.novo"/></a>
+            <a href="<s:url action="criarTicket"/>"><s:text -´="botao.ticket.novo"/></a>
         </div>
         <h3>Tickets</h3>
         <s:iterator value="#request.tickets">
